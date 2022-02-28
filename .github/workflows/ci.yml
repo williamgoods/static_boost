@@ -15,6 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     container: docker.io/library/archlinux:latest
     steps:
+      - name: Exec deploy script with SSH
+        uses: appleboy/ssh-action@master
+        with:
+          command_timeout: 8m
+          host: ${{ secrets.ALIYUM_HOST }}
+          username: ${{ secrets.ALIYUM_USER }}
+          password: ${{ secrets.ALIYUM_PWD }}
+          port: ${{secrets.ALIYUM_PORT }}
+
       - name: Checkout branch
         uses: actions/checkout@v2
       - name: Refresh pacman repository
