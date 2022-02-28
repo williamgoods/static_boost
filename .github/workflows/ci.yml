@@ -1,53 +1,53 @@
-name: CI Build
+#name: CI Build
 
-on: push
-#push:
-  #branches:
-    #- uos
+#on: push
+##push:
+  ##branches:
+    ##- uos
 
-#pull_request:
-  #branches:
-    #- uos
+##pull_request:
+  ##branches:
+    ##- uos
 
-jobs:
-  archlinux:
-    name: Archlinux Build Check
-    runs-on: ubuntu-latest
-    container: docker.io/library/archlinux:latest
-    steps:
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          #port: ${{ secrets.PORT }}
-          script: whoami
+#jobs:
+  #archlinux:
+    #name: Archlinux Build Check
+    #runs-on: ubuntu-latest
+    #container: docker.io/library/archlinux:latest
+    #steps:
+      #- name: executing remote ssh commands using password
+        #uses: appleboy/ssh-action@master
+        #with:
+          #host: ${{ secrets.HOST }}
+          #username: ${{ secrets.USERNAME }}
+          #password: ${{ secrets.PASSWORD }}
+          ##port: ${{ secrets.PORT }}
+          #script: whoami
 
-      - name: Checkout branch
-        uses: actions/checkout@v2
-      - name: Refresh pacman repository
-        run: pacman -Syy
-      #- name: Install build dependencies
-        #run: pacman -S --noconfirm base-devel cmake ninja qt5-tools deepin-qt-dbus-factory dtkwidget
-      - name: Install boost
-        run: pacman -S --noconfirm extra/boost git openssh
-      - name: Show boost
-        run: |
-          ls /usr/lib/libboost_*
-          ls /usr/include/boost
+      #- name: Checkout branch
+        #uses: actions/checkout@v2
+      #- name: Refresh pacman repository
+        #run: pacman -Syy
+      ##- name: Install build dependencies
+        ##run: pacman -S --noconfirm base-devel cmake ninja qt5-tools deepin-qt-dbus-factory dtkwidget
+      #- name: Install boost
+        #run: pacman -S --noconfirm extra/boost git openssh
+      #- name: Show boost
+        #run: |
+          #ls /usr/lib/libboost_*
+          #ls /usr/include/boost
 
-      - name: Push
-        run: |
-          ls
-          git config --global init.defaultBranch main
-          git init
-          git remote add origin git@github.com:williamgoods/static_boost.git
-          git pull
-          mkdir -p include/boost
-          mkdir -p lib
-          cp -rf /usr/lib/libboost_* lib 
-          cp -rf /usr/include/boost include/boost
-          git add .
-          git commit -m "a new boost version"
-          git push
+      #- name: Push
+        #run: |
+          #ls
+          #git config --global init.defaultBranch main
+          #git init
+          #git remote add origin git@github.com:williamgoods/static_boost.git
+          #git pull
+          #mkdir -p include/boost
+          #mkdir -p lib
+          #cp -rf /usr/lib/libboost_* lib 
+          #cp -rf /usr/include/boost include/boost
+          #git add .
+          #git commit -m "a new boost version"
+          #git push
