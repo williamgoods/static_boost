@@ -11,4 +11,14 @@ jobs:
 
     - name: Install boost
       run: |
-        sudo -E apt-get install libboost-all-dev
+        sudo -E apt-get install libboost-all-dev``
+    
+    - name: Show boost library
+      run: |
+        sudo -E ls /usr/lib/libboost_*
+        sudo -E ls /usr/include/boost
+    
+    - name: Show Current Path
+      run: |
+        sudo -E pwd
+        
