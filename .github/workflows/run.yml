@@ -9,11 +9,11 @@ on: push
   #branches:
     #- uos
 jobs:
-  deploy:
+  archlinux:
       name: "Deploy to staging"
 
       runs-on: ubuntu-latest
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      #if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       # needs: test
       steps:
         - name: Configure SSH
