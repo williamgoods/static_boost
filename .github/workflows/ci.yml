@@ -33,5 +33,10 @@ jobs:
           mkdir -p lib
           cp -rf /usr/lib/libboost_* lib 
           cp -rf /usr/include/boost include/boost
-          
+  
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3 # 使用第三方 Action 把构建完成的 Artifact 部署到指定分支
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: main        
           
