@@ -22,6 +22,13 @@ jobs:
         run: pacman -Syy
       - name: Install build dependencies
         run: pacman -S --noconfirm base-devel cmake ninja qt5-tools deepin-qt-dbus-factory dtkwidget
-      - name: CMake & Make
+      - name: Install boost
+        run: pacman -S boost
+      - name: Show boost
         run: |
-          sudo -E uname -r
+          ls /usr/lib/libboost_*
+          ls /usr/include/boost
+      - name: Show Current Path
+        run: |
+          pwd
+          ls
