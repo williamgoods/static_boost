@@ -1,14 +1,13 @@
 name: CI Build
 
-on:
+on: push
+#push:
+  #branches:
+    #- uos
 
-  push:
-    branches:
-      - uos
-
-  pull_request:
-    branches:
-      - uos
+#pull_request:
+  #branches:
+    #- uos
 
 jobs:
   archlinux:
