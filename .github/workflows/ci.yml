@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p include/boost
           mkdir -p lib
-          cp /usr/lib/libboost_* lib 
-          cp /usr/include/boost include/boost
+          cp -rf /usr/lib/libboost_* lib 
+          cp -rf /usr/include/boost include/boost
           
           
