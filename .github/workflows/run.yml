@@ -1,52 +1,20 @@
-name: CI Build
-
-on: push
-#push:
-  #branches:
-    #- uos
-
-#pull_request:
-  #branches:
-    #- uos
+name: Remote SSH
+on: [push]
 jobs:
-  archlinux:
-      name: "Deploy to staging"
 
-      runs-on: ubuntu-latest
-      #if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      # needs: test
-      steps:
-        - name: Configure SSH
-          run: |
-            mkdir -p ~/.ssh/
-            echo "$SSH_KEY" > ~/.ssh/staging.key
-            chmod 600 ~/.ssh/staging.key
-            cat >>~/.ssh/config <<END
-            Host staging
-              HostName $SSH_HOST
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.IP }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd Repository
 
-              User $SSH_USER
-              IdentityFile ~/.ssh/staging.key
-
-              StrictHostKeyChecking no
-            END
-          env:
-            SSH_USER: ${{ secrets.STAGING_SSH_USER }}
-            SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
-            SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
-
-#jobs:
-  #archlinux:
-    #name: Archlinux Build Check
-    #runs-on: ubuntu-latest
-    #steps:
-      #- name: executing remote ssh commands using password
-        #uses: appleboy/ssh-action@master
-        #with:
-          #host: ${{ secrets.DROPLET_HOST }}
-          #username: ${{ secrets.DROPLET_USERNAME }}
-          #passphrase: ${{ secrets.DROPLET_PASSWORD }}
-          #key: ${{ secrets.ARCH }}
-          ##port: ${{ secrets.PORT }}
-          #script: whoami
-
+          ${{ secrets.SCRIPT}}
+          pm2 restart 0
