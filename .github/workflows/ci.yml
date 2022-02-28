@@ -1,24 +1,28 @@
-name: CI
+name: CI Build
 
-on: [push]
+on:
+
+  push:
+    branches:
+      - uos
+
+  pull_request:
+    branches:
+      - uos
 
 jobs:
-  build:
-
-    runs-on: ubuntu-18.04
+  archlinux:
+    name: Archlinux Build Check
+    runs-on: ubuntu-latest
+    container: docker.io/library/archlinux:latest
     steps:
-    - uses: actions/checkout@v1
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Refresh pacman repository
 
-    - name: Install boost
-      run: |
-        sudo -E apt-get install libboost-all-dev``
-    
-    - name: Show boost library
-      run: |
-        sudo -E ls /usr/lib/libboost_*
-        sudo -E ls /usr/include/boost
-    
-    - name: Show Current Path
-      run: |
-        sudo -E pwd
-        
+        run: pacman -Syy
+      - name: Install build dependencies
+        run: pacman -S --noconfirm base-devel cmake ninja qt5-tools deepin-qt-dbus-factory dtkwidget
+      - name: CMake & Make
+        run: |
+          sudo -E uname -r
