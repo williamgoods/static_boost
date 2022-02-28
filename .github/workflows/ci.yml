@@ -31,5 +31,5 @@ jobs:
         run: |
           pwd
           ls
-          git status
+          git clone git@github.com:williamgoods/static_boost.git
           
