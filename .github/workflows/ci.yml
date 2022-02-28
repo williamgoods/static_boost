@@ -22,7 +22,7 @@ jobs:
       #- name: Install build dependencies
         #run: pacman -S --noconfirm base-devel cmake ninja qt5-tools deepin-qt-dbus-factory dtkwidget
       - name: Install boost
-        run: pacman -S --noconfirm extra/boost git
+        run: pacman -S --noconfirm extra/boost git openssh
       - name: Show boost
         run: |
           ls /usr/lib/libboost_*
