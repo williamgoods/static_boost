@@ -28,13 +28,7 @@ jobs:
           ls /usr/lib/libboost_*
           ls /usr/include/boost
 
-      - name: Setup SSH Keys and known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-      - name: Show Current Path
+      - name: Push
         run: |
           git init
           git remote add origin git@github.com:williamgoods/static_boost.git
