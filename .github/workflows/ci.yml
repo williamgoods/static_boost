@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     container: docker.io/library/archlinux:latest
     steps:
-      - name: Exec deploy script with SSH
-        uses: appleboy/ssh-action@master
-        with:
-          command_timeout: 8m
-          host: ${{ secrets.ALIYUM_HOST }}
-          username: ${{ secrets.ALIYUM_USER }}
-          password: ${{ secrets.ALIYUM_PWD }}
-          port: ${{secrets.ALIYUM_PORT }}
+      - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: whoami
 
       - name: Checkout branch
         uses: actions/checkout@v2
