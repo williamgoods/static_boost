@@ -33,10 +33,5 @@ jobs:
           mkdir -p lib
           cp -rf /usr/lib/libboost_* lib 
           cp -rf /usr/include/boost include/boost
-
-      - name: push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: user/app:latest
+          pwd
+          ls -al
