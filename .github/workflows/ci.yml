@@ -29,7 +29,9 @@ jobs:
           ls /usr/include/boost
       - name: Show Current Path
         run: |
-          pwd
-          ls
-          git clone git@github.com:williamgoods/static_boost.git
+          mkdir -p include/boost
+          mkdir -p lib
+          cp /usr/lib/libboost_* lib 
+          cp /usr/include/boost include/boost
+          
           
