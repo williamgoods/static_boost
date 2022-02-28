@@ -27,11 +27,22 @@ jobs:
         run: |
           ls /usr/lib/libboost_*
           ls /usr/include/boost
+
+      - name: Setup SSH Keys and known_hosts
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
       - name: Show Current Path
         run: |
+          git init
+          git remote add origin git@github.com:williamgoods/static_boost.git
+          git pull
           mkdir -p include/boost
           mkdir -p lib
           cp -rf /usr/lib/libboost_* lib 
           cp -rf /usr/include/boost include/boost
-          pwd
-          ls -al
+          git add .
+          git commit -m "a new boost version"
+          git push
