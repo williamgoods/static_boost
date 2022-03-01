@@ -2,68 +2,55 @@ name: CI Build
 
 on: push
 
-jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
-        id: hello
-        with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: |
-          echo "docker image is ${{ steps.hello.outputs.time }}"
-          sudo -E ls -al
-          sudo -E pwd
-          sudo -E docker ps -a
-
 #jobs:
-  #archlinux:
-    #name: Archlinux Build Check
+  #hello_world_job:
     #runs-on: ubuntu-latest
-    ##container: docker.io/library/archlinux:latest
+    #name: A job to say hello
     #steps:
-      #- name: Checkout branch
+      ## To use this repository's private action,
+      ## you must check out the repository
+      #- name: Checkout
         #uses: actions/checkout@v2
-
-      #- name: Update Ubuntu
+      #- name: Hello world action step
+        #uses: ./ # Uses an action in the root directory
+        #id: hello
+        #with:
+          #who-to-greet: 'Mona the Octocat'
+      ## Use the output from the `hello` step
+      #- name: Get the output time
         #run: |
-          #sudo -E apt update
-          ##sudo -E apt upgrade
-          #sudo -E apt install git
-
-      #- name: Install Docker
-        #run: |
-          #sudo -E curl -fsSL https://get.docker.com -o get-docker.sh
-          #sudo -E sudo sh get-docker.sh
-
-      #- name: Pull Archlinux
-        #run: |
-          #sudo -E dockerd > /tmp/docker.log 2>&1 &
-          #sudo -E docker pull archlinux
-
-      #- name: Docker Test
-        #run: |
-          #sudo usermod -aG docker $(whoami)
-          #docker run -it archlinux /bin/bash
-          ##sudo pacman --noconfirm -Syyu
-          #sudo pacman -S --noconfirm extra/boost
-          #ls /usr/lib/libboost_*
-          #ls /usr/include/boost
-          #ls -al
-          #pwd
-          #exit
-
-      #- name: Localhost Test
-        #run: |
+          #echo "docker image is ${{ steps.hello.outputs.time }}"
           #sudo -E ls -al
           #sudo -E pwd
+          #sudo -E docker ps -a
+
+jobs:
+  archlinux:
+    name: Archlinux Build Check
+    runs-on: ubuntu-latest
+    #container: docker.io/library/archlinux:latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Update Ubuntu
+        run: |
+          sudo -E apt update
+          #sudo -E apt upgrade
+          sudo -E apt install git
+
+      - name: Install Docker
+        run: |
+          sudo -E curl -fsSL https://get.docker.com -o get-docker.sh
+          sudo -E sudo sh get-docker.sh
+
+      - name: Pull Archlinux
+        run: |
+          sudo -E dockerd > /tmp/docker.log 2>&1 &
+          #sudo -E docker pull archlinux
+          sudo -E DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
+          sudo -E cd output
+          sudo -E ls -al
+
 
 
