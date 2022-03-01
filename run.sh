@@ -13,15 +13,15 @@ cp -rf /usr/include/boost
 
 mkdir -p /boost
 
-if [ -d "/boost/include" ]; then
-    rm -rf /boost/include
-fi
+#if [ -d "/boost/include" ]; then
+rm -rf /boost/include
+#fi
 
 mkdir -p /boost/include
 
-if [ -d "/boost/lib" ]; then
-    rm -rf /boost/lib
-fi
+#if [ -d "/boost/lib" ]; then
+rm -rf /boost/lib
+#fi
 
 mkdir -p /boost/lib
 
