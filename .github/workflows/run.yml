@@ -10,13 +10,32 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
-      - name: Pull Archlinux
+
+      - name: Update Ubuntu
         run: |
           sudo -E apt update
           sudo -E apt upgrade
+
+      - name: Install Docker
+        run: |
           sudo -E curl -fsSL https://get.docker.com -o get-docker.sh
           sudo -E sudo sh get-docker.sh
+
+      - name: Pull Archlinux
+        run: |
           sudo -E dockerd > /tmp/docker.log 2>&1 &
           sudo -E docker pull archlinux
+
+      - name: Docker Test
+        run: |
+          sudo -E docker run -it archlinux /bin/bash
+          sudo -E ls -al
+          sudo -E pwd
+          sudo -E exit
+
+      - name: Localhost Test
+        run: |
+          sudo -E ls -al
+          sudo -E pwd
 
 
