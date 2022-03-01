@@ -2,6 +2,7 @@
 
 echo "now we are in the archlinux container test"
 
+pacman --noconfirm -Syyu
 pacman -S --noconfirm extra/boost
 
 ls /usr/lib/libboost_*
