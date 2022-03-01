@@ -1,3 +1,3 @@
 FROM archlinux
 
-RUN pacman -Syyu
+RUN pacman --noconfirm -Syyu
