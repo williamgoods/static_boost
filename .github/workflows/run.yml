@@ -29,8 +29,9 @@ jobs:
 
       - name: Docker Test
         run: |
-          sudo -E docker run -i archlinux /bin/bash
-          sudo pacman --noconfirm -Syyu
+          sudo usermod -aG docker $(whoami)
+          docker run -i archlinux /bin/bash
+          #sudo pacman --noconfirm -Syyu
           sudo pacman -S --noconfirm extra/boost
           ls /usr/lib/libboost_*
           ls /usr/include/boost
