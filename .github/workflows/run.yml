@@ -42,6 +42,7 @@ jobs:
         run: |
           git config --local user.email "lw2957409438@gmail.com"
           git config --local user.name "blackwilliam"
+          git add .
           git commit -m "Boost Update From Archlinux" -a
 
       - name: Push changes
