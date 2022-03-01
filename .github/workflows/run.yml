@@ -23,6 +23,7 @@ jobs:
       - name: Install Docker
         run: |
           sudo -E curl -fsSL https://get.docker.com -o get-docker.sh
+          rm get-docker.sh
           sudo -E sudo sh get-docker.sh
 
       - name: Pull Archlinux
