@@ -26,6 +26,8 @@ WORKDIR /boost
 FROM scratch AS export-stage
 COPY --from=copy_test /boost/ .
 
+RUN exit
+
 ## Copies your code file from your action repository to the filesystem path `/` of the container
 #COPY entrypoint.sh /entrypoint.sh
 
