@@ -36,8 +36,8 @@ jobs:
         run: |
           sudo -E ls -al
           sudo -E pwd
-          sudo -E cd lib
-          sudo -E ls -al
+          cd lib
+          ls -al
       - name: Commit files
         run: |
           git config --local user.email "lw2957409438@gmail.com"
