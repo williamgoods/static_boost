@@ -46,13 +46,21 @@ jobs:
           git config --local user.email "lw2957409438@gmail.com"
           git config --local user.name "blackwilliam"
           git add .
-          git commit -m "Boost Update From Archlinux" -a
+          #git commit -m "Boost Update From Archlinux" -a
+          remote_repo="https://${GITHUB_ACTOR}:${{secrets.ARCH}}@github.com/${GITHUB_REPOSITORY}.git"
+          if [ -z "$(git status --porcelain)" ]
+          then
+              echo "nothing to update."
+          else
+              git commit -m "triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git push "${remote_repo}" HEAD:main
+          fi
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.ARCH }}
-          branch: ${{ github.ref }}
+      #- name: Push changes
+        #uses: ad-m/github-push-action@master
+        #with:
+          #github_token: ${{ secrets.ARCH }}
+          #branch: ${{ github.ref }}
 
 #jobs:
   #hello_world_job:
