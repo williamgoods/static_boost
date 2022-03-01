@@ -1,20 +1,22 @@
-name: Remote SSH
-on: [push]
+name: CI Build
+
+on: push
+
 jobs:
-
-  build:
-    name: Build
+  archlinux:
+    name: Archlinux Build Check
     runs-on: ubuntu-latest
+    #container: docker.io/library/archlinux:latest
     steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ arch.IP }}
-        username: ${{ arch.USER }}
-        password: ${{ arch.PRIVATE_KEY }}
-        port: ${{ arch.PORT }}
-        script: |
-          cd Repository
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Pull Archlinux
+        run: |
+          sudo -E apt update
+          sudo -E apt upgrade
+          sudo -E curl -fsSL https://get.docker.com -o get-docker.sh
+          sudo -E sudo sh get-docker.sh
+          sudo -E dockerd > /tmp/docker.log 2>&1 &
+          sudo -E docker pull archlinux
 
-          ${{ secrets.SCRIPT}}
-          pm2 restart 0
+
