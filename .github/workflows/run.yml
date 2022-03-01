@@ -30,8 +30,8 @@ jobs:
       - name: Docker Test
         run: |
           sudo -E docker run -i archlinux /bin/bash
-          pacman --noconfirm -Syyu
-          pacman -S --noconfirm extra/boost
+          sudo pacman --noconfirm -Syyu
+          sudo pacman -S --noconfirm extra/boost
           ls /usr/lib/libboost_*
           ls /usr/include/boost
           ls -al
