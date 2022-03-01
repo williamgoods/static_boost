@@ -18,7 +18,7 @@ jobs:
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
       - name: Get the output time
-        run:|
+        run: |
           echo "docker image is ${{ steps.hello.outputs.time }}"
           sudo -E ls -al
           sudo -E pwd
