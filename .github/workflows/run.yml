@@ -15,6 +15,7 @@ jobs:
         run: |
           sudo -E apt update
           #sudo -E apt upgrade
+          sudo -E apt install git
 
       - name: Install Docker
         run: |
@@ -29,9 +30,9 @@ jobs:
       - name: Docker Test
         run: |
           sudo -E docker run -i archlinux /bin/bash
-          sudo -E ls -al
-          sudo -E pwd
-          sudo -E exit
+          ls -al
+          pwd
+          exit
 
       - name: Localhost Test
         run: |
