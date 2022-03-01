@@ -26,7 +26,13 @@ jobs:
         run: |
           sudo -E dockerd > /tmp/docker.log 2>&1 &
           #sudo -E docker pull archlinux
+
+      - name: Run Dockerfile With Docker
+        run: |
           sudo -E DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
+
+      - name: Echo Output
+        run: |
           sudo -E cd output
           sudo -E ls -al
 
