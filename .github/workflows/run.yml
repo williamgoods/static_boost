@@ -25,16 +25,12 @@ jobs:
       - name: Pull Archlinux
         run: |
           sudo -E dockerd > /tmp/docker.log 2>&1 &
-          #sudo -E docker pull archlinux
+          sudo -E docker pull archlinux
 
-      - name: Run Dockerfile With Docker
+      - name: Run Docker
         run: |
-          sudo -E DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
-
-      - name: Echo Output
-        run: |
-          sudo -E cd output
-          sudo -E ls -al
+          sudo -E docker run -dit --name test -v $(pwd):/boost archlinux /bin/bash
+          sudo -E docker exec test /boost/run.sh
 
 #jobs:
   #hello_world_job:

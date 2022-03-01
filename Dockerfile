@@ -21,12 +21,10 @@ RUN ls -al
 RUN pwd
 RUN echo "end process of copy boost static library! "
 
-WORKDIR /boost
-
-FROM scratch AS export-stage
-COPY --from=copy_test /boost/ .
-
-RUN exit
+#WORKDIR /boost
+#
+#FROM scratch AS export-stage
+#COPY --from=copy_test /boost/ .
 
 ## Copies your code file from your action repository to the filesystem path `/` of the container
 #COPY entrypoint.sh /entrypoint.sh
