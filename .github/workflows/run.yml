@@ -32,6 +32,10 @@ jobs:
           sudo -E docker run -dit --name test -v $(pwd):/boost archlinux /bin/bash
           sudo -E docker exec test /boost/run.sh
 
+      - name: Show Boost Static Library
+        run: |
+          sudo -E ls -al
+          sudo -E pwd
 #jobs:
   #hello_world_job:
     #runs-on: ubuntu-latest
