@@ -8,9 +8,6 @@ pacman -S --noconfirm extra/boost
 ls /usr/lib/libboost_*
 ls /usr/include/boost
 
-cp -rf /usr/lib/libboost_* 
-cp -rf /usr/include/boost
-
 mkdir -p /boost
 
 #if [ -d "/boost/include" ]; then
